@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/wifi_manual_Layout"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/black_overlay"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/wifi_manual_text"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="@string/WifiSetup"/>
+
+        <EditText
+            android:id="@+id/wifi_manual_SSID_EditText"
+            style="@style/wifi_manual_editor"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:text="@string/Blank"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/wifi_manual_text"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/Password"/>
+
+        <EditText
+            android:id="@+id/wifi_manual_PassWD_EditText"
+            style="@style/wifi_manual_editor"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:inputType="textPassword"
+            android:text="@string/Blank"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/wifi_manual_text"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/Status"/>
+
+        <TextView
+            android:id="@+id/wifi_manual_Status_TextView"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@string/WifiState"
+            android:textColor="#ff888888"
+            android:textSize="15dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wifi_manual_Button_Group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <!--        <Button
+                    android:id="@+id/wifi_manual_Button_back"
+                    android:layout_width="120dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/init_button_seletcor"
+                    android:text="@string/Back"/>-->
+        <Button
+            android:id="@+id/wifi_manual_Button_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/init_button_seletcor"
+            android:text="@string/ShowPassword"
+            android:textColor="#ffffffff"/>
+
+        <Button
+            android:id="@+id/wifi_manual_Button_connect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/init_button_seletcor"
+            android:text="@string/Connect"
+            android:textColor="#ffffffff"/>
+
+    </LinearLayout>
+</LinearLayout>

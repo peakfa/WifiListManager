@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">WifiDemo</string>
+
+    <string name="SelectNetwork">Select Network</string>
+    <string name="Rescan">Rescan</string>
+    <string name="ManualWifiSetup">Manual Wifi Setup</string>
+    <string name="Skip">Skip</string>
+
+    <string name="WifiSetup">Wifi Setup for:</string>
+    <string name="Blank"> </string>
+    <string name="Password">Password:</string>
+    <string name="Status">Status:</string>
+    <string name="WifiState">Not Connected</string>
+    <string name="Back">Back</string>
+    <string name="ShowPassword">Show Password</string>
+    <string name="Connect">Connect</string>
+    <string name="Next">Next</string>
+
+    <string name="GetStarted">Get Started</string>
+    <string name="Confirm">Confirm</string>
+    <string name="MainMenu">Main Menu</string>
+    <string name="Close">Close</string>
+
+    <string name="TimeZoneSettings">Time Zone Settings</string>
+    <string name="WifiSettings">Wifi Settings</string>
+    <string name="WizardInit">Wizard Init</string>
+    <string name="Upgrade">Upgrade</string>
+    <string name="TextView">TextView</string>
+</resources>
