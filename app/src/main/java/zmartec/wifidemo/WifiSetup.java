@@ -8,6 +8,7 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,7 @@ public class WifiSetup extends Dialog{
     private View mView;
     public WifiManager wifiManager;
     public List<ScanResult> list;
-    public WiFiAdmin wiFiAdmin;
+  public WiFiAdmin mWiFiAdmin;
     public String wifiItemSSID;
     public ImageView mScan_ImageView;
     public Context mContextMain;
@@ -60,10 +61,8 @@ public class WifiSetup extends Dialog{
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_SHOW_WIFI_LIST:
-                    wiFiAdmin.GetScan();
-                    wiFiAdmin.getConfiguration();
-                    wifiManager = (WifiManager) mContextMain.getSystemService(WIFI_SERVICE);
-                    list = wifiManager.getScanResults();
+                    mWiFiAdmin.getConfiguration();
+                    list = mWiFiAdmin.GetScan();
                     ListView listView = (ListView) mView.findViewById(R.id.wifi_setup_ListView);
                     if (list != null) {
                         listView.setAdapter(new WifiListAdapter(mContextMain, list));
@@ -80,6 +79,7 @@ public class WifiSetup extends Dialog{
             super.handleMessage(msg);
         }
     };
+
 
     public WifiSetup(Context context) {
         super(context, R.style.FullscreenTheme);
@@ -106,9 +106,9 @@ public class WifiSetup extends Dialog{
                 mWifiManual.show();
             }
         });
-        WiFiAdmin wiFiAdmin = new WiFiAdmin(mContextMain);
-        if (wiFiAdmin.checkState()!= WifiConfiguration.Status.ENABLED) {
-            wiFiAdmin.openWifi();
+        mWiFiAdmin = new WiFiAdmin(mContextMain);
+        if (mWiFiAdmin.checkState()!= WifiConfiguration.Status.ENABLED) {
+            mWiFiAdmin.openWifi();
         }
         Scan_Init();
     }
@@ -130,7 +130,7 @@ public class WifiSetup extends Dialog{
                     int i = 0;
                     while (i++ < (arr_wifi_scan.length - 1)) {
                         if (bKill_Thread == false) {
-                            ToolsUtil.getInstance().sendMsg(mScanHandler, MSG_DRAW_WIFI_SCAN, (Integer) arr_wifi_scan[i]);
+                            UtilTools.getInstance().sendMsg(mScanHandler, MSG_DRAW_WIFI_SCAN, (Integer) arr_wifi_scan[i]);
                             try {
                                 Thread.sleep(500);
                             } catch (InterruptedException e) {
@@ -140,8 +140,8 @@ public class WifiSetup extends Dialog{
                     }
                 }
                 if (bKill_Thread == false) {
-                    ToolsUtil.getInstance().sendMsg(mScanHandler, MSG_DRAW_WIFI_SCAN, (Object) arr_wifi_scan[0]);
-                    ToolsUtil.getInstance().sendMsg(mScanHandler, MSG_SHOW_WIFI_LIST, 0);
+                    UtilTools.getInstance().sendMsg(mScanHandler, MSG_DRAW_WIFI_SCAN, (Object) arr_wifi_scan[0]);
+                    UtilTools.getInstance().sendMsg(mScanHandler, MSG_SHOW_WIFI_LIST, 0);
                 }
             }
         });
@@ -149,14 +149,13 @@ public class WifiSetup extends Dialog{
     }
 
     private void Scan_Init() {
-        wiFiAdmin = new WiFiAdmin(mContextMain);
-        wiFiAdmin.startScan();
+        mWiFiAdmin.startScan();
         Scan_Draw();
-        ToolsUtil.getInstance().sendMsg(mScanHandler, MSG_SHOW_WIFI_LIST, 100);
+        UtilTools.getInstance().sendMsg(mScanHandler, MSG_SHOW_WIFI_LIST, 100);
     }
 
     private void ReScan() {
-        wiFiAdmin.goScan();
+        mWiFiAdmin.goScan();
         Scan_Draw();
     }
 
@@ -166,9 +165,9 @@ public class WifiSetup extends Dialog{
                 Log.d(TAG, "BSSID:" + list.get(position).BSSID);
                 // 连接WiFi
                 wifiItemSSID = list.get(position).SSID;
-                int wifiItemId = wiFiAdmin.IsConfiguration("\"" + wifiItemSSID + "\"");
+                int wifiItemId = mWiFiAdmin.IsConfiguration("\"" + wifiItemSSID + "\"");
                 if (wifiItemId != -1) {
-                    if (wiFiAdmin.ConnectWifi(wifiItemId)) {
+                    if (mWiFiAdmin.ConnectWifi(wifiItemId)) {
                         // 连接已保存密码的WiFi
                         Scan_Draw();
                     }
@@ -227,22 +226,22 @@ public class WifiSetup extends Dialog{
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
             if (wifiInfo.getSSID().equals("\"" + str_SSID + "\"")) {
                 list.set(0, scanResult);//TODO set  postion first
-                imageview_connected.setImageDrawable(mContextMain.getResources().getDrawable(R.drawable.wifi_connected));
+                imageview_connected.setImageDrawable(ContextCompat.getDrawable(mContextMain,R.drawable.wifi_connected));
             } else {
-                imageview_connected.setImageDrawable(mContextMain.getResources().getDrawable(R.drawable.wifi_lock));
+                imageview_connected.setImageDrawable(ContextCompat.getDrawable(mContextMain,R.drawable.wifi_lock));
             }
 
             ImageView imageView = (ImageView) view.findViewById(R.id.Signal_ImageView);
 
             //判断信号强度，显示对应的指示图标
             if (Math.abs(scanResult.level) > 100) {
-                imageView.setImageDrawable(mContextMain.getResources().getDrawable(arr_wifi_signal[1]));
+                imageView.setImageDrawable(ContextCompat.getDrawable(mContextMain,arr_wifi_signal[1]));
             } else if (Math.abs(scanResult.level) > 70) {
-                imageView.setImageDrawable(mContextMain.getResources().getDrawable(arr_wifi_signal[2]));
+                imageView.setImageDrawable(ContextCompat.getDrawable(mContextMain,arr_wifi_signal[2]));
             } else if (Math.abs(scanResult.level) > 40) {
-                imageView.setImageDrawable(mContextMain.getResources().getDrawable(arr_wifi_signal[3]));
+                imageView.setImageDrawable(ContextCompat.getDrawable(mContextMain,arr_wifi_signal[3]));
             } else {
-                imageView.setImageDrawable(mContextMain.getResources().getDrawable(arr_wifi_signal[4]));
+                imageView.setImageDrawable(ContextCompat.getDrawable(mContextMain,arr_wifi_signal[4]));
             }
             return view;
         }

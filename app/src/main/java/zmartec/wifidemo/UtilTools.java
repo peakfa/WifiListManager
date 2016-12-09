@@ -4,14 +4,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-public class ToolsUtil {
-	private static final String TAG = "ToolsUtil";
-	private static ToolsUtil mToolsUtil = null;
+public class UtilTools{
+	private static final String TAG = "UtilTools";
+	private static UtilTools mToolsUtil = null;
 	private String mTag = "xxx";
 
-	public static synchronized ToolsUtil getInstance(){
+	public static synchronized UtilTools getInstance(){
 		if(mToolsUtil == null){
-			mToolsUtil = new ToolsUtil();
+			mToolsUtil = new UtilTools();
 		}
 		return mToolsUtil;
 	}

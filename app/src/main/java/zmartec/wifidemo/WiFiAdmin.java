@@ -101,12 +101,7 @@ public class WiFiAdmin {
         mWifiConfigurations = mWifiManager.getConfiguredNetworks();
     }
 
-    public void GetScan() {
-        // 得到扫描结果
-        mWifiList = mWifiManager.getScanResults();
-        // 得到配置好的网络连接
-        mWifiConfigurations = mWifiManager.getConfiguredNetworks();
-    }
+
 
     public void goScan() {
         mWifiManager.startScan();
@@ -247,6 +242,12 @@ public class WiFiAdmin {
         return false;
     }
 
+
+    public List<ScanResult> GetScan() {
+        // 得到扫描结果
+        mWifiList = mWifiManager.getScanResults();
+        return mWifiList;
+    }
     /** * 得到Wifi配置好的信息 */
     public void getConfiguration() {
         wifiConfigList = mWifiManager.getConfiguredNetworks();// 得到配置好的网络信息

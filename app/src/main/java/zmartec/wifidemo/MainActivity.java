@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         WifiSetup wifiSetup = new WifiSetup(this);
         wifiSetup.show();
+
     }
 
 }

@@ -95,9 +95,9 @@ public class WifiManual extends Dialog{
 				strPassword = mEditTextPASSWD.getText().toString();
 
 				if (strPassword != null) {
-					mWifiSetup.wiFiAdmin.connect(mWifiSetup.wifiItemSSID, strPassword, WiFiAdmin.WifiCipherType.WIFICIPHER_WPA);
+					mWifiSetup.mWiFiAdmin.connect(mWifiSetup.wifiItemSSID, strPassword, WiFiAdmin.WifiCipherType.WIFICIPHER_WPA);
 					mStatus_TextView.setText("Connecting...");
-					ToolsUtil.getInstance().sendMsg(mScanHandler,MSG_DRAW_WIFI_STATUS_FAIL,4000);
+					UtilTools.getInstance().sendMsg(mScanHandler,MSG_DRAW_WIFI_STATUS_FAIL,4000);
 				}
 			}
 		});
